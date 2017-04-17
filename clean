@@ -1,0 +1,21 @@
+#!/bin/bash
+
+before=`ls | wc -l`
+rm *~ \#* >& /dev/null
+after=`ls | wc -l`
+numcleaned=`expr $before - $after`
+
+if [ $numcleaned -eq 0 ]
+    then
+    echo No files to be cleaned
+fi
+
+if [ $numcleaned -eq 1 ]
+    then
+    echo $numcleaned file cleaned
+fi
+
+if [ $numcleaned -gt 1 ]
+    then
+    echo $numcleaned files cleaned
+fi

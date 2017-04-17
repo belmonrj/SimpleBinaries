@@ -1,0 +1,12 @@
+#!/usr/bin/perl
+
+$prefix_string = 'scp belmonrj@rftpexp.rhic.bnl.gov:';
+
+$input_string = $ARGV[0];
+
+$command_string = $prefix_string.$input_string.' .';
+
+print "Command string is $command_string \n\n";
+
+system($command_string);
+

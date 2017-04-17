@@ -1,0 +1,15 @@
+#!/usr/bin/perl
+
+@LIST = `ls *.txt`; #new
+
+foreach(@LIST)
+{
+
+    $file = $_;
+    chomp($file);
+
+    $file =~ s/\.txt//;
+
+    system("mv $file.txt $file.dat");
+
+}

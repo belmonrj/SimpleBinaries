@@ -1,0 +1,33 @@
+#!/usr/bin/perl
+
+@LIST = `ls *\\\ * >& /dev/null`;
+
+foreach(@LIST)
+{
+
+    $file = $_;
+    chomp($file);
+
+    $file1 = $file;
+    $file2 = $file;
+
+    $file2 =~ s/\ /_/g; # replace ' ' with '_'
+    $file2 =~ s/\(/_/g; # replace '(' with '_'
+    $file2 =~ s/\)/_/g; # replace ')' with '_'
+    $file2 =~ s/\:/X/g; # replace ':' with 'X'
+
+    system("mv \"$file1\" $file2");
+
+}
+
+$size = @LIST;
+
+if ( $size == 1 )
+{
+    print "1 file changed \n";
+}
+else
+{
+    print "$size files changed \n";
+}
+

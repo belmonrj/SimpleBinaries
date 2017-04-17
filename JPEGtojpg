@@ -1,0 +1,23 @@
+#!/usr/bin/perl
+
+@LIST = `ls *.jpeg`;
+
+foreach(@LIST)
+{
+    $file = $_;
+    chomp($file);
+    $file =~ s/\.txt//;
+    system("mv $file.jpeg $file.jpg");
+}
+
+
+
+@LIST = `ls *.JPG`;
+
+foreach(@LIST)
+{
+    $file = $_;
+    chomp($file);
+    $file =~ s/\.txt//;
+    system("mv $file.JPG $file.jpg");
+}
