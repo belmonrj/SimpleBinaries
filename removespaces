@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-@LIST = `ls *\\\ * >& /dev/null`;
+@LIST = `ls *\\\ * 2> /dev/null`;
 
 foreach(@LIST)
 {
