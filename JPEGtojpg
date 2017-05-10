@@ -1,23 +1,41 @@
 #!/usr/bin/perl
 
-@LIST = `ls *.jpeg`;
+@LIST = `ls *.jpeg 2> /dev/null`;
+
+$size1 = @LIST;
 
 foreach(@LIST)
 {
     $file = $_;
     chomp($file);
-    $file =~ s/\.txt//;
+    $file =~ s/\.jpeg//;
     system("mv $file.jpeg $file.jpg");
 }
 
 
 
-@LIST = `ls *.JPG`;
+@LIST = `ls *.JPG 2> /dev/null`;
+
+$size2 = @LIST;
 
 foreach(@LIST)
 {
     $file = $_;
     chomp($file);
-    $file =~ s/\.txt//;
+    $file =~ s/\.JPG//;
     system("mv $file.JPG $file.jpg");
 }
+
+
+
+$size = $size1 + $size2;
+
+if ( $size == 1 )
+{
+    print "1 file changed \n";
+}
+else
+{
+    print "$size files changed \n";
+}
+
