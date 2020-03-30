@@ -1,0 +1,17 @@
+#!/bin/csh
+
+set prefix=`echo $OFFLINE_MAIN | awk -F '/' '{print $2}'`
+
+if ( "$prefix" == "afs" ) then
+    echo Currently using PHENIX environment
+endif
+
+if ( "$prefix" == "cvmfs" ) then
+    echo Currently using sPHENIX environment
+endif
+
+echo To see a list of all possible libraries, type ll /afs/rhic.bnl.gov/phenix/PHENIX_LIB/sys/x8664_sl7/ or ll /cvmfs/sphenix.sdcc.bnl.gov/x8664_sl7/release/
+echo You are currently using $OFFLINE_MAIN
+echo Have a nice day!
+date
+
