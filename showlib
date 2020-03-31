@@ -1,4 +1,4 @@
-#!/bin/csh
+#!/bin/csh -f
 
 set prefix=`echo $OFFLINE_MAIN | awk -F '/' '{print $2}'`
 
