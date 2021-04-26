@@ -1,0 +1,6 @@
+# Author: Christopher Shroba https://stackoverflow.com/users/2874789/christopher-shroba
+# stackoverflow post https://stackoverflow.com/questions/14762034/push-to-github-without-a-password-using-ssh-key#1476585
+# an elegant solution to updating git remote to access via ssh rather than password authentication
+
+git remote set-url origin $(git remote show origin | grep "Fetch URL" | sed 's/ *Fetch URL: //' | sed 's/https:\/\/github.com\//git@github.com:/')
+
