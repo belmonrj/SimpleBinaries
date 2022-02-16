@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-$prefix_string = 'scp belmonrj@rftpexp.rhic.bnl.gov:';
+$prefix_string = 'sftp belmonrj@sftp.sdcc.bnl.gov:';
 
 $input_string = $ARGV[0];
 

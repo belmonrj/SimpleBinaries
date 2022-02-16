@@ -1,10 +1,10 @@
 #!/usr/bin/perl
 
-$suffix_string = 'belmonrj@rftpexp.rhic.bnl.gov:';
+$suffix_string = 'belmonrj@sftp.sdcc.bnl.gov:';
 
 $input_string = $ARGV[0];
 
-$command_string = 'scp '.$input_string.' '.$suffix_string;
+$command_string = 'sftp '.$suffix_string.' <<< $\'put '.$input_string.'\'';
 
 print "Command string is $command_string \n\n";
 
