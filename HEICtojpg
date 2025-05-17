@@ -1,0 +1,15 @@
+#!/usr/bin/perl
+
+@LIST = `ls *.HEIC`;
+
+foreach(@LIST)
+{
+
+    $file = $_;
+    chomp($file);
+
+    $file =~ s/\.HEIC//;
+
+    system("magick $file.HEIC -quality 95% $file.jpg");
+
+}
