@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#echo "Name of the script: $0"
+#echo "Total number of arguments: $#"
+#echo "Values of all the arguments: $@"
+
+D=$(gdate +%s)
+
+if [ $# -eq 1 ]; then
+  D=$(gdate +%s --date="$1")
+
+elif [ $# -eq 2 ]; then
+  echo "Incorrect usage"
+  exit 1
+fi
+
+S=1672549200
+
+echo "scale=0; ($D - $S) * 56299000/6" | bc -lq
+
