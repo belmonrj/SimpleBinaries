@@ -11,6 +11,7 @@ if [ $# -eq 1 ]; then
 
 elif [ $# -eq 2 ]; then
   echo "Incorrect usage"
+  echo "Do $0 or $0 \"some date\""
   exit 1
 fi
 
