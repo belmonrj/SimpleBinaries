@@ -1,0 +1,28 @@
+#!/bin/bash
+
+#echo "Name of the script: $0"
+#echo "Total number of arguments: $#"
+#echo "Values of all the arguments: $@"
+
+if [ $# -ne 1 ]; then
+  echo "Incorrect usage"
+  echo "Do $0 BCO to convert BCO into date"
+  exit 1
+fi
+
+B=$1
+
+S=1672549200
+
+F=0.00000010657382902005364216060676
+#D=$(echo "scale=0; 6/56299000 *$B + $S" | bc -lq)
+D=$(echo "scale=0; $F*$B + $S" | bc -lq)
+
+D=${D%.*}
+
+R=$(gdate --date=@$D)
+
+echo "HRD is $R"
+echo "TSE is $D"
+echo "BCO is $B"
+
