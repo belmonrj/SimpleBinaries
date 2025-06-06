@@ -17,8 +17,6 @@ fi
 
 S=1672549200
 
-#echo "scale=0; ($D - $S) * 56299000/6" | bc -lq
-
 B=$(echo "scale=0; ($D - $S) * 56299000/6" | bc -lq)
 
 R=$(gdate --date=@$D)
