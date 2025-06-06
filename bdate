@@ -18,7 +18,7 @@ F=0.00000010657382902005364216060676
 #D=$(echo "scale=0; 6/56299000 *$B + $S" | bc -lq)
 D=$(echo "scale=0; $F*$B + $S" | bc -lq)
 
-D=${D%.*}
+D=$(printf "%.0f" $D)
 
 R=$(gdate --date=@$D)
 
