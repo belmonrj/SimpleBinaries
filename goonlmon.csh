@@ -4,7 +4,7 @@ echo Getting set up for online monitoring work
 
 # this first line is for 1008-level development
 #source /cvmfs/sphenix.sdcc.bnl.gov/online/Debian/bin/sphenix_setup.csh -n
-source /cvmfs/sphenix.sdcc.bnl.gov/online/alma9.2/opt/sphenix/core/bin/sphenix_setup.sh -n
+source /cvmfs/sphenix.sdcc.bnl.gov/online/alma9.2/opt/sphenix/core/bin/sphenix_setup.csh -n
 setenv online /sphenix/user/belmonrj/OnlMon
 setenv ONLMON_MAIN $online/install
 source $online/macros/setup_onlmon.csh
