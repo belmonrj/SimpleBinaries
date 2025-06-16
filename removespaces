@@ -1,4 +1,6 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -CSD
+
+use utf8;
 
 @LIST = `ls *\\\ * 2> /dev/null`;
 
@@ -11,10 +13,21 @@ foreach(@LIST)
     $file1 = $file;
     $file2 = $file;
 
-    $file2 =~ s/\ /_/g; # replace ' ' with '_'
     $file2 =~ s/\(/_/g; # replace '(' with '_'
     $file2 =~ s/\)/_/g; # replace ')' with '_'
     $file2 =~ s/\:/X/g; # replace ':' with 'X'
+
+    # this one works as desired
+    # replace regular unicode space U+0020 with '_'
+    $file2 =~ s/[\x{0020}]/_/g;
+
+    # this one doesn't do anything for me, but may be useful
+    # replace non-breaking unicode space U+00A0 with '_'
+    $file2 =~ s/[\x{00A0}]/_/g;
+
+    # I got this one at unicodedecoder.com - this is the funny one in the macOS screenshot file name
+    # replace non-breaking unicode space U+202F with '_'
+    $file2 =~ s/[\x{202F}]/_/g;
 
     system("mv \"$file1\" $file2");
 
