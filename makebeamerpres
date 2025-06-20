@@ -1,0 +1,121 @@
+#!/opt/homebrew/bin/python3
+
+'''
+Make a beamer style presentation template with
+slides for each *.png and *.pdf in the directory
+Written by Darren McGlinchey
+'''
+
+import os
+from argparse import ArgumentParser
+
+#First get any command line arguments
+parser = ArgumentParser(description = """Make beamer style presentation template including slides for each *.png and *.pdf in the directory""")
+
+parser.add_argument("-f", "--file", dest="filename",
+                  help="write output to FILE", metavar="FILE")
+parser.add_argument("-d", "--dir", dest="directory",
+				  help="get input from DIR (default to current directory)", metavar="DIR")
+parser.add_argument("-t", "--title", dest="title",
+				  help="presentation title", metavar="TITLE")
+parser.add_argument("-v", "--verbose",
+                  action="store_true", dest="verbose", default=True,
+                  help="print status messages to stdout")
+
+parser.set_defaults(filename="beamerpres.tex", directory=os.getcwd(), title='Title of presentation')
+
+args = parser.parse_args()
+
+if args.verbose :
+    print("Will make beamer latex formatted slides for all *.png and *.pdf in : ")
+    print("  %s" % (args.directory))
+
+files = os.listdir(args.directory)
+files.sort()
+##print files
+
+figs = [ifile for ifile in files if ifile.endswith('.png') or ifile.endswith('.pdf')]
+if args.verbose :
+    print("Will make slides for the following files : ")
+    for fig in figs: print( "  %s" % (fig))
+
+# making the file
+fo = open(args.filename, "w")
+
+
+# write all the boilerplate stuff
+#fo.write("\\documentclass[xcolor={dvipsnames}]{beamer}\n")
+fo.write("\\documentclass[aspectratio=169,compress,10pt]{beamer}\n")
+fo.write("\n")
+fo.write("\\mode<presentation>\n")
+fo.write("{\n")
+#fo.write("\\usetheme{Boadilla}\n")
+fo.write("\\usetheme{Warsaw}\n")
+#fo.write("\\usecolortheme{cu}\n")
+#fo.write("\\setbeamercovered{transparent}\n")
+fo.write("\\beamertemplatenavigationsymbolsempty\n")
+fo.write("}\n")
+
+fo.write("\n")
+#fo.write("\\usepackage[english]{babel}\n")
+#fo.write("\\usepackage[latin1]{inputenc}\n")
+#fo.write("\\usepackage{tikz}\n")
+#fo.write("\\usepackage{times}\n")
+#fo.write("\\usepackage[T1]{fontenc}\n")
+fo.write("\\usepackage{hyperref}\n")
+#fo.write("\\hypersetup{colorlinks=true, urlcolor=cyan}\n")
+#fo.write("\\usepackage{xspace}\n")
+#fo.write("\\usepackage{multirow}\n")
+
+fo.write("\n")
+fo.write("\\newcommand{\\blue}[1]{\\textcolor{blue}{#1}}\n")
+fo.write("\\newcommand{\\red}[1]{\\textcolor{red}{#1}}\n")
+fo.write("\\newcommand{\\green}[1]{\\textcolor{OliveGreen}{#1}}\n")
+fo.write("\n")
+
+fo.write("\n")
+fo.write("\\title[%s]{%s}\n" % (args.title, args.title))
+fo.write("\\author[Ron B.]{Ron B.}\n")
+fo.write("\\institute[UNCG]{\\normalsize University of North Carolina Greensboro}\n")
+fo.write("\\date[\\today]{\\today}\n")
+
+fo.write("\n")
+fo.write("\\begin{document}\n")
+
+# write the title page
+fo.write("\n")
+fo.write("\\begin{frame}\n")
+fo.write("\\titlepage\n")
+fo.write("\\end{frame}\n")
+
+# write pages for each figure
+for ifile in figs :
+    fo.write("\n")
+    fo.write("\\begin{frame}{Title of slide}\n")
+    fo.write("\\begin{center}\n")
+    #fo.write("\\includegraphics[width=0.5\\textwidth]{%s}\n" % (ifile[:-4]))
+    fo.write("\\includegraphics[width=0.5\\textwidth]{%s}\n" % (ifile))
+    fo.write("\\end{center}\n")
+    fo.write("\\begin{itemize}\n")
+    fo.write("\\item Bullet item\n")
+    fo.write("\\end{itemize}\n")
+    fo.write("\\end{frame}\n")
+# write placeholder final slide
+fo.write("\n")
+fo.write("\\begin{frame}{Summary}\n")
+fo.write("\\begin{itemize}\n")
+fo.write("\\item Bullet item\n")
+fo.write("\\end{itemize}\n")
+fo.write("\\end{frame}\n")
+
+# write the end of the document
+fo.write("\n")
+fo.write("\n")
+fo.write("\n")
+fo.write("\\end{document}\n")
+
+
+if args.verbose :
+    print("Wrote presentation to :")
+    print("  %s" % (args.filename))
+
