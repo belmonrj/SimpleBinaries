@@ -1,6 +1,10 @@
 #!/bin/bash
 
-DATE_CMD="gdate"
+if command -v gdate >/dev/null 2>&1; then
+  DATE_CMD="gdate"
+else
+  DATE_CMD="date"
+fi
 
 D=$($DATE_CMD +%s)
 
