@@ -1,13 +1,11 @@
 #!/bin/bash
 
-#echo "Name of the script: $0"
-#echo "Total number of arguments: $#"
-#echo "Values of all the arguments: $@"
+DATE_CMD="gdate"
 
-D=$(gdate +%s)
+D=$($DATE_CMD +%s)
 
 if [ $# -eq 1 ]; then
-  D=$(gdate +%s --date="$1")
+  D=$($DATE_CMD +%s --date="$1")
 
 elif [ $# -eq 2 ]; then
   echo "Incorrect usage"
