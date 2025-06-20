@@ -21,7 +21,7 @@ S=1672549200
 
 B=$(echo "scale=0; ($D - $S) * 56299000/6" | bc -lq)
 
-R=$(gdate --date=@$D)
+R=$($DATE_CMD --date=@$D)
 
 echo "HRD is $R"
 echo "TSE is $D"
