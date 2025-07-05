@@ -1,8 +1,10 @@
 #!/bin/bash
 
-#echo "Name of the script: $0"
-#echo "Total number of arguments: $#"
-#echo "Values of all the arguments: $@"
+if command -v gdate >/dev/null 2>&1; then
+  DATE_CMD="gdate"
+else
+  DATE_CMD="date"
+fi
 
 if [ $# -ne 1 ]; then
   echo "Incorrect usage"
@@ -20,7 +22,7 @@ D=$(echo "scale=0; $F*$B + $S" | bc -lq)
 
 D=$(printf "%.0f" $D)
 
-R=$(gdate --date=@$D)
+R=$($DATE_CMD --date=@$D)
 
 echo "HRD is $R"
 echo "TSE is $D"
