@@ -31,7 +31,7 @@ if [ $# -gt 0 ]; then
     F=0.00000010657382902005364216060676
     D=$(echo "scale=0; $F*$B + $S" | bc -lq)
   fi
-elif [ $# -eq 2 ]; then
+elif [ $# -ge 2 ]; then
   echo "Incorrect usage"
   echo "Do $0 or $0 --date=\"some date\" or $0 --bco=BCO"
   exit 1
@@ -42,7 +42,7 @@ fi
 # I'll come up with a smart solution later...
 # observations:
 #   when input bco > 0, the computed bco is always off by 1 (smaller, closer to zero)
-#   when input bco < 0, the computed bco is always off by 1 (larger, closer to zer)
+#   when input bco < 0, the computed bco is always off by 1 (larger, closer to zero)
 B=$(echo "scale=0; ($D - $S) * 56299000/6" | bc -lq)
 
 if [ $INPUT_BCO -gt 0 ]; then
