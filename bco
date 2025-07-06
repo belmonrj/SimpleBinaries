@@ -1,29 +1,55 @@
 #!/bin/bash
 
+# check if gdate is available
+# if it is, use it, otherwise use date
+# date works fine if it's GNU date, but BSD date may not work
 if command -v gdate >/dev/null 2>&1; then
   DATE_CMD="gdate"
 else
   DATE_CMD="date"
 fi
 
+# the exact date (time since epoch) for BCO=0
+S=1672549200
+
+# use current date as default
 D=$($DATE_CMD +%s)
 
-if [ $# -eq 1 ]; then
-  D=$($DATE_CMD +%s --date="$1")
-
+# check for arguments
+if [ $# -gt 0 ]; then
+  # check if the input argument is a date
+  if [[ "$1" == --date=* ]]; then
+    INPUT_DATE="${1#--date=}"
+    D=$($DATE_CMD +%s --date="$INPUT_DATE")
+  # check if the input argument is a bco
+  elif [[ "$1" == --bco=* ]]; then
+    INPUT_BCO="${1#--bco=}"
+    echo "Input bco is $INPUT_BCO"
+    B=$INPUT_BCO
+    F=0.00000010657382902005364216060676
+    D=$(echo "scale=0; $F*$B + $S" | bc -lq)
+  fi
 elif [ $# -eq 2 ]; then
   echo "Incorrect usage"
-  echo "Do $0 or $0 \"some date\""
+  echo "Do $0 or $0 --date=\"some date\" or $0 --bco=BCO"
   exit 1
 fi
 
-S=1672549200
-
+# this is a redundant calculation if the BCO is input
+# interesting sanity check for the moment...
+# I'll come up with a smart solution later...
 B=$(echo "scale=0; ($D - $S) * 56299000/6" | bc -lq)
 
+# this is also potentially redundant
+# but it will output the date in standard form, which is actually helpful information
 R=$($DATE_CMD --date=@$D)
 
+# human readable date
 echo "HRD is $R"
+
+# time since epoch
 echo "TSE is $D"
+
+# beam count orbit
 echo "BCO is $B"
 
