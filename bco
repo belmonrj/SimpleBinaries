@@ -9,6 +9,8 @@ else
   DATE_CMD="date"
 fi
 
+INPUT_BCO=0
+
 # the exact date (time since epoch) for BCO=0
 S=1672549200
 
@@ -38,7 +40,16 @@ fi
 # this is a redundant calculation if the BCO is input
 # interesting sanity check for the moment...
 # I'll come up with a smart solution later...
+# observations:
+#   when input bco > 0, the computed bco is always off by 1 (smaller, closer to zero)
+#   when input bco < 0, the computed bco is always off by 1 (larger, closer to zer)
 B=$(echo "scale=0; ($D - $S) * 56299000/6" | bc -lq)
+
+if [ $INPUT_BCO -gt 0 ]; then
+  B=$(($B + 1))
+elif [ $INPUT_BCO -lt 0 ]; then
+  B=$(($B - 1))
+fi
 
 # this is also potentially redundant
 # but it will output the date in standard form, which is actually helpful information
