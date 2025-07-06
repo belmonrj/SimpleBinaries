@@ -12,6 +12,12 @@ from argparse import ArgumentParser
 #First get any command line arguments
 parser = ArgumentParser(description = """Make beamer style presentation template including slides for each *.png and *.pdf in the directory""")
 
+# add flags to select only certain file types
+
+parser.add_argument("-pdf", "--pdf", action="store_true", help="use pdf files only; if accidentally used in conjunction with png option, both file types will be used")
+
+parser.add_argument("-png", "--png", action="store_true", help="use png files only; if accidentally used in conjunction with pdf option, both file types will be used")
+
 parser.add_argument("-f", "--file", dest="filename",
                   help="write output to FILE", metavar="FILE")
 parser.add_argument("-d", "--dir", dest="directory",
@@ -35,6 +41,13 @@ files.sort()
 ##print files
 
 figs = [ifile for ifile in files if ifile.endswith('.png') or ifile.endswith('.pdf')]
+
+if args.pdf == True and args.png == False :
+    figs = [ifile for ifile in files if ifile.endswith('.pdf')]
+
+if args.pdf == False and args.png == True :
+    figs = [ifile for ifile in files if ifile.endswith('.png')]
+
 if args.verbose :
     print("Will make slides for the following files : ")
     for fig in figs: print( "  %s" % (fig))
