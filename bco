@@ -44,6 +44,10 @@ B=$(echo "scale=0; ($D - $S) * 56299000/6" | bc -lq)
 # but it will output the date in standard form, which is actually helpful information
 R=$($DATE_CMD --date=@$D)
 
+# update D to display as an integer
+# no need for a dozen or more digits after the decimal when providing a bco
+D=$(printf "%.0f" $D)
+
 # human readable date
 echo "HRD is $R"
 
