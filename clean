@@ -17,7 +17,7 @@ before=`$lscommand | wc -l`
 
 rm *~ \#* >& /dev/null
 
-if [ "$cleanhidden" = true ]
+if [[ $cleanhidden == true ]]
    then
    rm .*~ >& /dev/null
 fi
