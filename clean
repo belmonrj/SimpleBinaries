@@ -1,8 +1,16 @@
 #!/bin/bash
 
 before=`ls | wc -l`
+
 rm *~ \#* >& /dev/null
+
+if [ "$1" == "-a" ]
+   then
+   rm .*~ >& /dev/null
+fi
+
 after=`ls | wc -l`
+
 numcleaned=`expr $before - $after`
 
 if [ $numcleaned -eq 0 ]
