@@ -1,17 +1,32 @@
 #!/bin/bash
 
-before=`ls | wc -l`
+
+
+cleanhidden=false
+lscommand="ls"
+
+if [ "$1" == "-a" ]
+   then
+   cleanhidden=true
+   lscommand="ls -a"
+fi
+
+
+
+before=`$lscommand | wc -l`
 
 rm *~ \#* >& /dev/null
 
-if [ "$1" == "-a" ]
+if [ "$cleanhidden" = true ]
    then
    rm .*~ >& /dev/null
 fi
 
-after=`ls | wc -l`
+after=`$lscommand | wc -l`
 
 numcleaned=`expr $before - $after`
+
+
 
 if [ $numcleaned -eq 0 ]
     then
