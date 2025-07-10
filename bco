@@ -28,8 +28,7 @@ if [ $# -gt 0 ]; then
     INPUT_BCO="${1#--bco=}"
     echo "Input bco is $INPUT_BCO"
     B=$INPUT_BCO
-    F=0.00000010657382902005364216060676
-    D=$(echo "scale=0; $F*$B + $S" | bc -lq)
+    D=$(echo "scale=50; (6/56299000)*$B + $S" | bc -lq)
   fi
 elif [ $# -ge 2 ]; then
   echo "Incorrect usage"
