@@ -10,19 +10,49 @@ else
 fi
 
 
+SINCE_DATE=""
+UNTIL_DATE=""
+
 # use current date as default
 NOW=$($DATE_CMD +%s)
 SINCE=$NOW
 UNTIL=$NOW
 
 # put code here to set the since and/or until via shell script options
+for arg in "$@"; do
+  case "$arg" in
+    --since=*)
+      SINCE_DATE="${arg#--since=}"
+      ;;
+    --until=*)
+      UNTIL_DATE="${arg#--until=}"
+      ;;
+    --help|-h)
+      echo "Usage: $0 [--since=\"DATE\"] [--until=\"DATE\"]"
+      exit 0
+      ;;
+    *)
+      echo "Unknown option: $arg"
+      echo "Run with --help for usage."
+      exit 1
+      ;;
+  esac
+done
 
+# debugging
+echo "SINCE_DATE is $SINCE_DATE"
+echo "UNTIL_DATE is $UNTIL_DATE"
+
+SINCE=$($DATE_CMD +%s --date="$SINCE_DATE")
+UNTIL=$($DATE_CMD +%s --date="$SINCE_DATE")
 
 # calculate the difference
 DIFFERENCE=$(($UNTIL-$SINCE))
 
-SINCE_DATE=$($DATE_CMD --date=@$SINCE)
-UNTIL_DATE=$($DATE_CMD --date=@$UNTIL)
+# debugging
+echo "SINCE is $SINCE"
+echo "UNTIL is $UNTIL"
+
 
 
 if [[ $SINCE -ne $NOW && $UNTIL -eq $NOW ]]
