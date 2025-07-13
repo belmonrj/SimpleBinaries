@@ -18,7 +18,8 @@ NOW=$($DATE_CMD +%s)
 SINCE=$NOW
 UNTIL=$NOW
 
-# put code here to set the since and/or until via shell script options
+# loop over the arguments
+# case seems to be the most elegant solution for setting the options
 for arg in "$@"; do
   case "$arg" in
     --since=*)
@@ -41,15 +42,10 @@ for arg in "$@"; do
   esac
 done
 
-# debugging
-echo "SINCE_DATE is $SINCE_DATE"
-echo "UNTIL_DATE is $UNTIL_DATE"
-echo "SINCE is $SINCE"
-echo "UNTIL is $UNTIL"
-
-
 # calculate the difference
 DIFFERENCE=$(($UNTIL-$SINCE))
+
+# put code here to convert difference into something nice
 
 
 
