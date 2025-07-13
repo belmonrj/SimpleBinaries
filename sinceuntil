@@ -55,7 +55,7 @@ SECONDS=$(($PART%60))
 
 # now make the difference string to make it nice and readable
 # less than a minute
-if [ "$TOTAL_SECONDS" -lt 60 ]
+if [ "$DIFFERENCE" -lt 60 ]
   then
   DIFFERENCE_STRING="$SECONDS second"
   if [ "$SECONDS" -ne 1 ]
@@ -63,7 +63,7 @@ if [ "$TOTAL_SECONDS" -lt 60 ]
     DIFFERENCE_STRING+="s"
   fi
 # less than an hour
-elif [ "$TOTAL_SECONDS" -lt 3600 ]
+elif [ "$DIFFERENCE" -lt 3600 ]
   then
   DIFFERENCE_STRING="$MINUTES minute"
   if [ "$MINUTES" -ne 1 ]
@@ -76,7 +76,7 @@ elif [ "$TOTAL_SECONDS" -lt 3600 ]
     DIFFERENCE_STRING+="s"
   fi
 # less than a day
-elif [ "$TOTAL_SECONDS" -lt 86400 ]
+elif [ "$DIFFERENCE" -lt 86400 ]
   then
   DIFFERENCE_STRING="$HOURS hour"
   if [ "$HOURS" -ne 1 ]
