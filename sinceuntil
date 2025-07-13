@@ -25,10 +25,14 @@ for arg in "$@"; do
   case "$arg" in
     --since=*)
       SINCE_DATE="${arg#--since=}"
+      # update the since date string with the default format of DATE_CMD
+      SINCE_DATE=$($DATE_CMD --date="$SINCE_DATE")
       SINCE=$($DATE_CMD +%s --date="$SINCE_DATE")
       ;;
     --until=*)
       UNTIL_DATE="${arg#--until=}"
+      # update the until date string with the default format of DATE_CMD
+      UNTIL_DATE=$($DATE_CMD --date="$UNTIL_DATE")
       UNTIL=$($DATE_CMD +%s --date="$UNTIL_DATE")
       ;;
     --help|-h)
