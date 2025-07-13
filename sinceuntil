@@ -27,7 +27,7 @@ for arg in "$@"; do
       ;;
     --until=*)
       UNTIL_DATE="${arg#--until=}"
-      UNTIL=$($DATE_CMD +%s --date="$SINCE_DATE")
+      UNTIL=$($DATE_CMD +%s --date="$UNTIL_DATE")
       ;;
     --help|-h)
       echo "Usage: $0 [--since=\"DATE\"] [--until=\"DATE\"]"
