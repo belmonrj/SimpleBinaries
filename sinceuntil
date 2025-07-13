@@ -23,9 +23,11 @@ for arg in "$@"; do
   case "$arg" in
     --since=*)
       SINCE_DATE="${arg#--since=}"
+      SINCE=$($DATE_CMD +%s --date="$SINCE_DATE")
       ;;
     --until=*)
       UNTIL_DATE="${arg#--until=}"
+      UNTIL=$($DATE_CMD +%s --date="$SINCE_DATE")
       ;;
     --help|-h)
       echo "Usage: $0 [--since=\"DATE\"] [--until=\"DATE\"]"
@@ -42,16 +44,12 @@ done
 # debugging
 echo "SINCE_DATE is $SINCE_DATE"
 echo "UNTIL_DATE is $UNTIL_DATE"
+echo "SINCE is $SINCE"
+echo "UNTIL is $UNTIL"
 
-SINCE=$($DATE_CMD +%s --date="$SINCE_DATE")
-UNTIL=$($DATE_CMD +%s --date="$SINCE_DATE")
 
 # calculate the difference
 DIFFERENCE=$(($UNTIL-$SINCE))
-
-# debugging
-echo "SINCE is $SINCE"
-echo "UNTIL is $UNTIL"
 
 
 
