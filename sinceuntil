@@ -53,6 +53,8 @@ PART=$((PART%3600))
 MINUTES=$((PART/60))
 SECONDS=$(($PART%60))
 
+echo "The number of days is $DAYS"
+
 # now make the difference string to make it nice and readable
 # less than a minute
 if [ "$DIFFERENCE" -lt 60 ]
@@ -102,7 +104,7 @@ else
     then
     DIFFERENCE_STRING+="s"
   fi
-  DIFFERENCE_STRING="$HOURS hour"
+  DIFFERENCE_STRING+=", $HOURS hour"
   if [ "$HOURS" -ne 1 ]
     then
     DIFFERENCE_STRING+="s"
@@ -115,7 +117,7 @@ else
   DIFFERENCE_STRING+=", $SECONDS second"
   if [ "$SECONDS" -ne 1 ]
     then
-     DIFFERENCE_STRING+="s"
+    DIFFERENCE_STRING+="s"
   fi
 fi
 
