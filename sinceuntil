@@ -95,6 +95,8 @@ elif [ "$DIFFERENCE" -lt 86400 ]
   fi
 # more than a day
 else
+  echo "Hello is anything happening in here?"
+  echo "The number of seconds is $DIFFERENCE"
   DIFFERENCE_STRING="$DAYS day"
   if [ "$DAYS" -ne 1 ]
     then
