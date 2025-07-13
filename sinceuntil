@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# check if gdate is available
+# if it is, use it, otherwise use date
+# date works fine if it's GNU date, but BSD date may not work
+if command -v gdate >/dev/null 2>&1; then
+  DATE_CMD="gdate"
+else
+  DATE_CMD="date"
+fi
+
+
+# use current date as default
+NOW=$($DATE_CMD +%s)
+SINCE=$NOW
+UNTIL=$NOW
+
+# put code here to set the since and/or until via shell script options
+
+
+# calculate the difference
+DIFFERENCE=$(($UNTIL-$SINCE))
+
+SINCE_DATE=$($DATE_CMD --date=@$SINCE)
+UNTIL_DATE=$($DATE_CMD --date=@$UNTIL)
+
+
+if [[ $SINCE -ne $NOW && $UNTIL -eq $NOW ]]
+    then
+    echo "It has been $DIFFERENCE since $SINCE_DATE"
+elif [[ $SINCE -eq $NOW && $UNTIL -ne $NOW ]]
+    then
+    echo "It is $DIFFERENCE until $UNTIL_DATE"
+elif [[ $SINCE -ne $NOW && $UNTIL -ne $NOW ]]
+    then
+    echo "The time difference between $SINCE_DATE and $UNTIL_DATE is $DIFFERENCE"
+else
+    echo "Unknown condition"
+fi
