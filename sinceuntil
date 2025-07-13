@@ -63,78 +63,62 @@ SECONDS=$(($PART%60))
 
 # now make the difference string to make it nice and readable
 # less than a minute
-if [ "$DIFFERENCE" -lt 60 ]
-  then
+if [ "$DIFFERENCE" -lt 60 ]; then
   DIFFERENCE_STRING="$SECONDS second"
-  if [ "$SECONDS" -ne 1 ]
-    then
+  if [ "$SECONDS" -ne 1 ]; then
     DIFFERENCE_STRING+="s"
   fi
 # less than an hour
-elif [ "$DIFFERENCE" -lt 3600 ]
-  then
+elif [ "$DIFFERENCE" -lt 3600 ]; then
   DIFFERENCE_STRING="$MINUTES minute"
-  if [ "$MINUTES" -ne 1 ]
-    then
+  if [ "$MINUTES" -ne 1 ]; then
     DIFFERENCE_STRING+="s"
   fi
   DIFFERENCE_STRING+=", $SECONDS second"
-  if [ "$SECONDS" -ne 1 ]
-    then
+  if [ "$SECONDS" -ne 1 ]; then
     DIFFERENCE_STRING+="s"
   fi
 # less than a day
-elif [ "$DIFFERENCE" -lt 86400 ]
-  then
+elif [ "$DIFFERENCE" -lt 86400 ]; then
   DIFFERENCE_STRING="$HOURS hour"
-  if [ "$HOURS" -ne 1 ]
-    then
+  if [ "$HOURS" -ne 1 ]; then
     DIFFERENCE_STRING+="s"
   fi
   DIFFERENCE_STRING+=", $MINUTES minute"
-  if [ "$MINUTES" -ne 1 ]
-    then
+  if [ "$MINUTES" -ne 1 ]; then
     DIFFERENCE_STRING+="s"
   fi
   DIFFERENCE_STRING+=", $SECONDS second"
-  if [ "$SECONDS" -ne 1 ]
-    then
+  if [ "$SECONDS" -ne 1 ]; then
      DIFFERENCE_STRING+="s"
   fi
 # more than a day
 else
   DIFFERENCE_STRING="$DAYS day"
-  if [ "$DAYS" -ne 1 ]
-    then
+  if [ "$DAYS" -ne 1 ]; then
     DIFFERENCE_STRING+="s"
   fi
   DIFFERENCE_STRING+=", $HOURS hour"
-  if [ "$HOURS" -ne 1 ]
-    then
+  if [ "$HOURS" -ne 1 ]; then
     DIFFERENCE_STRING+="s"
   fi
   DIFFERENCE_STRING+=", $MINUTES minute"
-  if [ "$MINUTES" -ne 1 ]
-    then
+  if [ "$MINUTES" -ne 1 ]; then
     DIFFERENCE_STRING+="s"
   fi
   DIFFERENCE_STRING+=", $SECONDS second"
-  if [ "$SECONDS" -ne 1 ]
-    then
+  if [ "$SECONDS" -ne 1 ]; then
     DIFFERENCE_STRING+="s"
   fi
 fi
 
 
 # now print all that stuff to the screen
-if [[ $SINCE -ne $NOW && $UNTIL -eq $NOW ]]
-  then
+if [[ $SINCE -ne $NOW && $UNTIL -eq $NOW ]]; then
   echo "It has been $DIFFERENCE_STRING since $SINCE_DATE"
-elif [[ $SINCE -eq $NOW && $UNTIL -ne $NOW ]]
-  then
+elif [[ $SINCE -eq $NOW && $UNTIL -ne $NOW ]]; then
   echo "It is $DIFFERENCE_STRING until $UNTIL_DATE"
-elif [[ $SINCE -ne $NOW && $UNTIL -ne $NOW ]]
-  then
+elif [[ $SINCE -ne $NOW && $UNTIL -ne $NOW ]]; then
   echo "The time difference between $SINCE_DATE and $UNTIL_DATE is $DIFFERENCE_STRING"
 else
   echo "Unknown condition"
