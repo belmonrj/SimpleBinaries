@@ -9,13 +9,27 @@ else
   DATE_CMD="date"
 fi
 
-INPUT_BCO=0
+get_bco_from_date()
+{
+  B=$(echo "scale=0; ($D - $S) * 56299000/6" | bc -lq)
+}
+
+get_date_from_bco()
+{
+  D=$(echo "scale=50; (6/56299000)*$B + $S" | bc -lq)
+}
+
+
+# set a default BCO that will get overwritten
+B=0
 
 # the exact date (time since epoch) for BCO=0
 S=1672549200
 
 # use current date as default
 D=$($DATE_CMD +%s)
+get_bco_from_date
+
 
 # check for arguments
 if [ $# -gt 0 ]; then
@@ -23,12 +37,15 @@ if [ $# -gt 0 ]; then
   if [[ "$1" == --date=* ]]; then
     INPUT_DATE="${1#--date=}"
     D=$($DATE_CMD +%s --date="$INPUT_DATE")
+    # use the function to get the bco from the date
+    get_bco_from_date
   # check if the input argument is a bco
   elif [[ "$1" == --bco=* ]]; then
     INPUT_BCO="${1#--bco=}"
     echo "Input bco is $INPUT_BCO"
     B=$INPUT_BCO
-    D=$(echo "scale=50; (6/56299000)*$B + $S" | bc -lq)
+    # use the function to get the date from the bco
+    get_date_from_bco
   fi
 elif [ $# -ge 2 ]; then
   echo "Incorrect usage"
@@ -36,22 +53,8 @@ elif [ $# -ge 2 ]; then
   exit 1
 fi
 
-# this is a redundant calculation if the BCO is input
-# interesting sanity check for the moment...
-# I'll come up with a smart solution later...
-# observations:
-#   when input bco > 0, the computed bco is always off by 1 (smaller, closer to zero)
-#   when input bco < 0, the computed bco is always off by 1 (larger, closer to zero)
-B=$(echo "scale=0; ($D - $S) * 56299000/6" | bc -lq)
 
-if [ $INPUT_BCO -gt 0 ]; then
-  B=$(($B + 1))
-elif [ $INPUT_BCO -lt 0 ]; then
-  B=$(($B - 1))
-fi
-
-# this is also potentially redundant
-# but it will output the date in standard form, which is actually helpful information
+# this is partially redundant, but it will output the date in standard form, which is actually helpful information
 R=$($DATE_CMD --date=@$D)
 
 # update D to display as an integer
