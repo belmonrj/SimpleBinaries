@@ -21,47 +21,6 @@ NOW=$($DATE_CMD +%s)
 SINCE=$NOW
 UNTIL=$NOW
 
-# loop over the arguments
-# case seems to be the most elegant solution for setting the options
-for arg in "$@"; do
-  case "$arg" in
-    --since=*)
-      SINCE_DATE="${arg#--since=}"
-      # update the since date string with the default format of DATE_CMD
-      SINCE_DATE=$($DATE_CMD --date="$SINCE_DATE")
-      SINCE=$($DATE_CMD +%s --date="$SINCE_DATE")
-      # calculate the difference with the function
-      calculate_difference
-      # determine the difference string
-      determine_difference_string
-      # print the string to the screen
-      print_difference
-      ;;
-    --until=*)
-      UNTIL_DATE="${arg#--until=}"
-      # update the until date string with the default format of DATE_CMD
-      UNTIL_DATE=$($DATE_CMD --date="$UNTIL_DATE")
-      UNTIL=$($DATE_CMD +%s --date="$UNTIL_DATE")
-      # calculate the difference with the function
-      calculate_difference
-      # determine the difference string
-      determine_difference_string
-      # print the string to the screen
-      print_difference
-      ;;
-    --help|-h)
-      echo "Usage: $0 [--since=\"DATE\"] [--until=\"DATE\"]"
-      exit 0
-      ;;
-    *)
-      echo "Unknown option: $arg"
-      echo "Run with --help for usage."
-      exit 1
-      ;;
-  esac
-done
-
-
 # calculate the difference in seconds based on until and since
 calculate_difference()
 {
@@ -131,6 +90,8 @@ determine_difference_string()
   fi
 } # determine_difference_string
 
+
+# print the difference string to the screen
 print_difference()
 {
   # now print all that stuff to the screen
@@ -144,3 +105,46 @@ print_difference()
     echo "Unknown condition"
   fi
 }
+
+
+# loop over the arguments
+# case seems to be the most elegant solution for setting the options
+for arg in "$@"; do
+  case "$arg" in
+    --since=*)
+      SINCE_DATE="${arg#--since=}"
+      # update the since date string with the default format of DATE_CMD
+      SINCE_DATE=$($DATE_CMD --date="$SINCE_DATE")
+      SINCE=$($DATE_CMD +%s --date="$SINCE_DATE")
+      # calculate the difference with the function
+      calculate_difference
+      # determine the difference string
+      determine_difference_string
+      # print the string to the screen
+      print_difference
+      ;;
+    --until=*)
+      UNTIL_DATE="${arg#--until=}"
+      # update the until date string with the default format of DATE_CMD
+      UNTIL_DATE=$($DATE_CMD --date="$UNTIL_DATE")
+      UNTIL=$($DATE_CMD +%s --date="$UNTIL_DATE")
+      # calculate the difference with the function
+      calculate_difference
+      # determine the difference string
+      determine_difference_string
+      # print the string to the screen
+      print_difference
+      ;;
+    --help|-h)
+      echo "Usage: $0 [--since=\"DATE\"] [--until=\"DATE\"]"
+      exit 0
+      ;;
+    *)
+      echo "Unknown option: $arg"
+      echo "Run with --help for usage."
+      exit 1
+      ;;
+  esac
+done
+
+
