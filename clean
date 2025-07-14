@@ -5,8 +5,7 @@
 cleanhidden=false
 lscommand="ls"
 
-if [ "$1" == "-a" ]
-   then
+if [ "$1" == "-a" ]; then
    cleanhidden=true
    lscommand="ls -a"
 fi
@@ -17,8 +16,7 @@ before=`$lscommand | wc -l`
 
 rm *~ \#* >& /dev/null
 
-if [[ $cleanhidden == true ]]
-   then
+if [[ $cleanhidden == true ]]; then
    rm .*~ >& /dev/null
 fi
 
@@ -28,17 +26,14 @@ numcleaned=`expr $before - $after`
 
 
 
-if [ $numcleaned -eq 0 ]
-    then
+if [ $numcleaned -eq 0 ]; then
     echo No files to be cleaned
 fi
 
-if [ $numcleaned -eq 1 ]
-    then
+if [ $numcleaned -eq 1 ]; then
     echo $numcleaned file cleaned
 fi
 
-if [ $numcleaned -gt 1 ]
-    then
+if [ $numcleaned -gt 1 ]; then
     echo $numcleaned files cleaned
 fi
