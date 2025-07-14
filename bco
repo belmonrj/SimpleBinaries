@@ -16,7 +16,12 @@ get_bco_from_date()
 
 get_date_from_bco()
 {
+  # the reasons are mysterious, but when getting a BCO from a date, if you then ask for the date
+  # for that BCO, the date is off by one second
+  # if you add 1 to that BCO, which advances the time by 106.574 ns, you recover the correct date
+  B=$(($B+1))
   D=$(echo "scale=50; (6/56299000)*$B + $S" | bc -lq)
+  B=$(($B-1))
 }
 
 
@@ -43,9 +48,7 @@ if [ $# -gt 0 ]; then
   elif [[ "$1" == --bco=* ]]; then
     B="${1#--bco=}"
     # use the function to get the date from the bco
-    B=$(($B+1))
     get_date_from_bco
-    B=$(($B-1))
   fi
 elif [ $# -ge 2 ]; then
   echo "Incorrect usage"
