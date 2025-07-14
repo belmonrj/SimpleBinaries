@@ -11,12 +11,13 @@ fi
 
 get_bco_from_date()
 {
+  # scale=0 because BCO must be an integer
   B=$(echo "scale=0; ($D - $S) * 56299000/6" | bc -lq)
 }
 
 get_date_from_bco()
 {
-  # the reasons are mysterious, but when getting a BCO from a date, if you then ask for the date
+  # the reason is a bit mysterious, but when getting a BCO from a date, if you then ask for the date
   # for that BCO, the date is off by one second
   # if you add 1 to that BCO, which advances the time by 106.574 ns, you recover the correct date
   B=$(($B+1))
