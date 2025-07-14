@@ -41,11 +41,11 @@ if [ $# -gt 0 ]; then
     get_bco_from_date
   # check if the input argument is a bco
   elif [[ "$1" == --bco=* ]]; then
-    INPUT_BCO="${1#--bco=}"
-    echo "Input bco is $INPUT_BCO"
-    B=$INPUT_BCO
+    B="${1#--bco=}"
     # use the function to get the date from the bco
+    B=$(($B+1))
     get_date_from_bco
+    B=$(($B-1))
   fi
 elif [ $# -ge 2 ]; then
   echo "Incorrect usage"
