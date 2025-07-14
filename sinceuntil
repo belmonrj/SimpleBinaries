@@ -74,7 +74,7 @@ elif [ "$DIFFERENCE" -lt 3600 ]; then
   if [ "$MINUTES" -ne 1 ]; then
     DIFFERENCE_STRING+="s"
   fi
-  DIFFERENCE_STRING+=", $SECONDS second"
+  DIFFERENCE_STRING+=", and $SECONDS second"
   if [ "$SECONDS" -ne 1 ]; then
     DIFFERENCE_STRING+="s"
   fi
@@ -88,7 +88,7 @@ elif [ "$DIFFERENCE" -lt 86400 ]; then
   if [ "$MINUTES" -ne 1 ]; then
     DIFFERENCE_STRING+="s"
   fi
-  DIFFERENCE_STRING+=", $SECONDS second"
+  DIFFERENCE_STRING+=", and $SECONDS second"
   if [ "$SECONDS" -ne 1 ]; then
      DIFFERENCE_STRING+="s"
   fi
@@ -106,7 +106,7 @@ else
   if [ "$MINUTES" -ne 1 ]; then
     DIFFERENCE_STRING+="s"
   fi
-  DIFFERENCE_STRING+=", $SECONDS second"
+  DIFFERENCE_STRING+=", and $SECONDS second"
   if [ "$SECONDS" -ne 1 ]; then
     DIFFERENCE_STRING+="s"
   fi
