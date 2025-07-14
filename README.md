@@ -8,13 +8,14 @@ fixgitremote | Christopher Shroba | Changes 'https://github.com/' to 'git@github
 goonlmon.csh | Ron Belmont | Sets up SDCC environment to do work for online monitoring
 HEICtojpg | Ron Belmont | Converts Apple-specific HEIC (high efficiency image container) into generic jpg
 JPEGtojpg | Ron Belmont | Converts JPEG, JPG, and jpeg to jpg
-kill_mau | Unknown :( | Clever one-liner shell script that gets a pid and then kills the process, I can't remember where I found this
+kill_mau | Ron Belmont | Extremely simple one-liner to kill Microsoft AutoUpdate
 makebeamerpres | Darren McGlinchey | Takes all the image files in a directory and makes a latex-beamer presentation
 removespaces | Ron Belmont | Finds files with spaces in the name and removes them
 scpd | Ron Belmont | Uses sftp to copy files down from SDCC
 scpu | Ron Belmont | Uses sftp to copy files up to SDCC
 showenv | Ron Belmont | Shows the current SDCC environment
 showlib | Ron Belmont | Shows the current $LD_LIBRARY path at SDCC
+sinceuntil | Ron Belmont | Tells how long it has been since some date/time, or how long it will be until some date/time
 switch_env.csh | Ron Belmont | Switch between the PHENIX and sPHENIX environments at SDCC
 txttodat | Ron Belmont | Converts any txt to a dat files
 
