@@ -1,0 +1,13 @@
+#!/bin/bash
+
+trap "echo Stopping!; exit 0" SIGINT
+trap "echo Dying!; exit 0" SIGTERM
+
+# this doesn't work because the process must be killed immediately
+trap "echo Dying extra hard!; exit 0" SIGKILL
+
+echo "Script started (PID: $$). Press Ctrl+C or send SIGTERM to stop."
+while true; do
+  echo "Working..."
+  sleep 2
+done
