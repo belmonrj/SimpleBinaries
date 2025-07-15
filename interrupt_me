@@ -5,15 +5,18 @@ flag=true
 trap "echo Stopping!; exit 0" SIGINT
 trap "echo Dying!; exit 0" SIGTERM
 
-# this doesn't work, but maybe it should?  will investigate
-trap "echo Stopping in a clever way!; $flag=false" SIGUSR1
+catch_sigusr1()
+{
+  echo "Stopping in a clever way!"
+  flag=false
+}
+catch_sigusr2()
+{
+  echo "Hey that tickles! Gonna keep going"
+}
 
-# this doesn't work, but I think it should...
-trap "echo Hey that tickles!  Still going..." SIGUSR2
-
-# this doesn't work because the process must be killed immediately
-# they call it "uncatchable" I think
-trap "echo Dying extra hard!; exit 0" SIGKILL
+trap catch_sigusr1 SIGUSR1
+trap catch_sigusr2 SIGUSR2
 
 echo "Script started (PID: $$). Press Ctrl+C or send SIGTERM to stop."
 while $flag; do
