@@ -1,6 +1,6 @@
 #!/bin/bash
 
-flag=true
+flag=1
 
 trap "echo Stopping!; exit 0" SIGINT
 trap "echo Dying!; exit 0" SIGTERM
@@ -8,7 +8,7 @@ trap "echo Dying!; exit 0" SIGTERM
 catch_sigusr1()
 {
   echo "Stopping in a clever way!"
-  flag=false
+  flag=0
 }
 catch_sigusr2()
 {
@@ -19,7 +19,7 @@ trap catch_sigusr1 SIGUSR1
 trap catch_sigusr2 SIGUSR2
 
 echo "Script started (PID: $$). Press Ctrl+C or send SIGTERM to stop."
-while $flag; do
+while (( flag )); do
   echo "Working..."
   sleep 2
 done
