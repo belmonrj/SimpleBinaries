@@ -152,6 +152,17 @@ for arg in "$@"; do
       echo "The date $AGO_REL $UNIT ago was $AGO_DATE"
       exit 0
       ;;
+    --from_now=*)
+      FN_REL="${arg#--from_now=}"
+      if [ $FN_REL -gt 1 ]; then
+        UNIT+="s"
+      fi
+      FN_REL_MULT=$(($FN_REL*MULTIPLIER))
+      FN_ABS=$(($NOW+$FN_REL_MULT))
+      FN_DATE=$($DATE_CMD --date=@$FN_ABS)
+      echo "The date $FN_REL $UNIT from now will be $FN_DATE"
+      exit 0
+      ;;
     --help|-h)
       echo "Usage: $0 [--since=\"DATE\"] [--until=\"DATE\"]"
       exit 0
