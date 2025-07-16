@@ -183,11 +183,17 @@ for arg in "$@"; do
       echo "Usage: $0 [--since=\"DATE\"] [--until=\"DATE\"]"
       exit 0
       ;;
-#    *)
-#      echo "Unknown option: $arg"
-#      echo "Run with --help for usage."
-#      exit 1
-#      ;;
+    --days)
+      ;;
+    --hours)
+      ;;
+    --minutes)
+      ;;
+    *)
+      echo "Unknown option: $arg"
+      echo "Run with --help for usage."
+      exit 1
+      ;;
   esac
 done
 
