@@ -10,12 +10,13 @@ HEICtojpg | Ron Belmont | Converts Apple-specific HEIC (high efficiency image co
 JPEGtojpg | Ron Belmont | Converts JPEG, JPG, and jpeg to jpg
 kill_mau | Ron Belmont | Extremely simple one-liner to kill Microsoft AutoUpdate
 makebeamerpres | Darren McGlinchey | Takes all the image files in a directory and makes a latex-beamer presentation
+options | VLP | Just playing around with different ways of doing options for scripts...
 removespaces | Ron Belmont | Finds files with spaces in the name and removes them
 scpd | Ron Belmont | Uses sftp to copy files down from SDCC
 scpu | Ron Belmont | Uses sftp to copy files up to SDCC
 showenv | Ron Belmont | Shows the current SDCC environment
 showlib | Ron Belmont | Shows the current $LD_LIBRARY path at SDCC
-sinceuntil | Ron Belmont | Tells how long it has been since some date/time, or how long it will be until some date/time
+sinceuntil | Ron Belmont | Gives the time interval between now and some date, or between two dates; gives the date for a specifed time interval
 switch_env.csh | Ron Belmont | Switch between the PHENIX and sPHENIX environments at SDCC
 txttodat | Ron Belmont | Converts any txt to a dat files
 

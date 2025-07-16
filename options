@@ -16,6 +16,7 @@ fi
 
 ECHO="false"
 
+<<block_comment
 while getopts "healb" OPTION; do
   case $OPTION in
     e)
@@ -47,6 +48,42 @@ while getopts "healb" OPTION; do
       ;;
   esac
 done
+block_comment
+
+
+
+for OPTION in "$@"; do
+  case $OPTION in
+    -e)
+      ECHO="true"
+      ;;
+    -a)
+      echo "Option a selected, which currently does nothing"
+      ;;
+    -l)
+      echo "Option ls selected, showing files"
+      ls
+      ;;
+    -b)
+      echo "Option b selected, showing current date and bco"
+      bco
+      ;;
+    -h)
+      echo "Usage:"
+      echo "$0 -X where X is any of the following options"
+      echo ""
+      echo "   -e     to execute echo \"hello world\""
+      echo "   -a     to do nothing (it tells you it does nothing)"
+      echo "   -b     to get the current date and bco"
+      echo "   -l     to do the ls command, because why not"
+      echo "   -h     help (this output)"
+      echo ""
+      echo "Options can be stacked in any order, such as $0 -a -b -e -l"
+      exit 0
+      ;;
+  esac
+done
+
 
 if [ $ECHO = "true" ]
 then
