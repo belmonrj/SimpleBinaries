@@ -109,7 +109,27 @@ print_difference()
 MULTIPLIER=1
 UNIT="second"
 
-# loop over the arguments
+# loop over the arguments once to check all for --UNITS
+# use that information to set the multiplier and unit
+# do this first so that --UNITS can come before or after --ago or --from_now
+for arg in "$@"; do
+  case "$arg" in
+    --days)
+      MULTIPLIER=86400
+      UNIT="day"
+      ;;
+    --hours)
+      MULTIPLIER=3600
+      UNIT="hour"
+      ;;
+    --minutes)
+      MULTIPLIER=60
+      UNIT="minute"
+      ;;
+  esac
+done
+
+# loop over the arguments a second time to check for other options
 # case seems to be the most elegant solution for setting the options
 for arg in "$@"; do
   case "$arg" in
@@ -137,10 +157,6 @@ for arg in "$@"; do
       # print the string to the screen
       print_difference
       ;;
-    --days)
-      MULTIPLIER=86400
-      UNIT="day"
-      ;;
     --ago=*)
       AGO_REL="${arg#--ago=}"
       if [ $AGO_REL -gt 1 ]; then
@@ -167,11 +183,11 @@ for arg in "$@"; do
       echo "Usage: $0 [--since=\"DATE\"] [--until=\"DATE\"]"
       exit 0
       ;;
-    *)
-      echo "Unknown option: $arg"
-      echo "Run with --help for usage."
-      exit 1
-      ;;
+#    *)
+#      echo "Unknown option: $arg"
+#      echo "Run with --help for usage."
+#      exit 1
+#      ;;
   esac
 done
 
