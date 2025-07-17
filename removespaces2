@@ -1,4 +1,4 @@
-#!/usr/bin/perl -CSD
+#!/usr/bin/perl -CD
 
 use utf8;
 
