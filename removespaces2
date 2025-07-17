@@ -16,7 +16,7 @@ foreach $file (@files)
         $newfile = $file;
         $newfile =~ s/[\p{Space}]/_/g;
         print "proposed new file name is: ".$newfile."\n";
-        #rename($file, $newfile) or warn "Could not rename $file: $!";
+        rename($file, $newfile) or warn "Could not rename $file: $!";
     }
 }
 
