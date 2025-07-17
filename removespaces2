@@ -16,8 +16,9 @@ foreach $file (@files)
     {
         print "found a match: ".$file."\n";
         $count++;
-        #$newfile = $file;
-        #$newfile =~ s/[\x{0020}\x{202F}]/_/g;
+        $newfile = $file;
+        $newfile =~ s/[\p{Space}]/_/g;
+        print "proposed new file name is: ".$newfile."\n";
         #rename($file, $newfile) or warn "Could not rename $file: $!";
     }
 }
