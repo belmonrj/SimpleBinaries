@@ -11,23 +11,23 @@ use utf8;
 $count = 0;
 foreach $file (@files)
 {
-    #if ($file =~ /[\x{0020}\x{202F}]/)
+    print "there is a file named: ".$file."\n";
     if ($file =~ /\p{Space}/)
     {
         print "found a match: ".$file."\n";
         $count++;
-        $newfile = $file;
-        $newfile =~ s/[\x{0020}\x{202F}]/_/g;
-        rename($file, $newfile) or warn "Could not rename $file: $!";
+        #$newfile = $file;
+        #$newfile =~ s/[\x{0020}\x{202F}]/_/g;
+        #rename($file, $newfile) or warn "Could not rename $file: $!";
     }
 }
 
 if ( $count == 1 )
 {
-    print "1 file changed \n";
+    print "1 file found \n";
 }
 else
 {
-    print "$count files changed \n";
+    print "$count files found \n";
 }
 
