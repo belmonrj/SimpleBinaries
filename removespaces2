@@ -2,30 +2,35 @@
 
 use utf8;
 
+$debug = 0;
+
 @files = `ls`;
 
 $count = 0;
 foreach $file (@files)
 {
     chomp($file);
-    print "there is a file named: ".$file."\n";
+    if ( $debug ) { print "there is a file named: ".$file."\n"; }
     if ($file =~ /\p{Space}/)
     {
-        print "found a match: ".$file."\n";
+        if ( $debug ) { print "found a match: ".$file."\n"; }
         $count++;
         $newfile = $file;
         $newfile =~ s/[\p{Space}]/_/g;
-        print "proposed new file name is: ".$newfile."\n";
-        rename($file, $newfile) or warn "Could not rename $file: $!";
+        if ( $debug ) { print "proposed new file name is: ".$newfile."\n"; }
+        if ( !$debug ) { rename($file, $newfile) or warn "Could not rename $file: $!"; }
     }
 }
 
+$word = "changed";
+if ( $debug ) { $word = "found"; }
+
 if ( $count == 1 )
 {
-    print "1 file found \n";
+    print "1 file ".$word." \n";
 }
 else
 {
-    print "$count files found \n";
+    print "$count files ".$word." \n";
 }
 
