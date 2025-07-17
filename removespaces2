@@ -2,7 +2,8 @@
 
 use utf8;
 
-@files = glob("*");
+#@files = glob("*");
+@files = `ls`;
 
 #print "list of all files is:\n";
 #print @files;
@@ -11,7 +12,7 @@ use utf8;
 $count = 0;
 foreach $file (@files)
 {
-    #chomp($file);
+    chomp($file);
     print "there is a file named: ".$file."\n";
     if ($file =~ /\p{Space}/)
     {
