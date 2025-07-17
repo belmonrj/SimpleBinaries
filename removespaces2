@@ -4,8 +4,9 @@ use utf8;
 use Getopt::Long;
 
 $debug = 0;
+$verbose = 0;
 
-GetOptions('debug' => \$debug);
+GetOptions('debug' => \$debug, 'verbose' => \$verbose);
 
 @files = `ls`;
 
@@ -13,14 +14,14 @@ $count = 0;
 foreach $file (@files)
 {
     chomp($file);
-    if ( $debug ) { print "there is a file named: ".$file."\n"; }
+    if ( $verbose ) { print "there is a file named: ".$file."\n"; }
     if ($file =~ /\p{Space}/)
     {
-        if ( $debug ) { print "found a match: ".$file."\n"; }
+        if ( $debug || $verbose ) { print "found a match: ".$file."\n"; }
         $count++;
         $newfile = $file;
         $newfile =~ s/[\p{Space}]/_/g;
-        if ( $debug ) { print "proposed new file name is: ".$newfile."\n"; }
+        if ( $debug || $verbose ) { print "proposed new file name is: ".$newfile."\n"; }
         if ( !$debug ) { rename($file, $newfile) or warn "Could not rename $file: $!"; }
     }
 }
