@@ -2,12 +2,7 @@
 
 use utf8;
 
-#@files = glob("*");
 @files = `ls`;
-
-#print "list of all files is:\n";
-#print @files;
-#print "\n";
 
 $count = 0;
 foreach $file (@files)
@@ -20,10 +15,6 @@ foreach $file (@files)
         $count++;
         $newfile = $file;
         $newfile =~ s/[\p{Space}]/_/g;
-        # doesn't help to do them separately
-        #$newfile =~ s/[\x{0020}]/_/g;
-        #$newfile =~ s/[\x{00A0}]/_/g;
-        #$newfile =~ s/[\x{202F}]/_/g;
         print "proposed new file name is: ".$newfile."\n";
         #rename($file, $newfile) or warn "Could not rename $file: $!";
     }
