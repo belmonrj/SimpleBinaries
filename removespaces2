@@ -1,8 +1,11 @@
 #!/usr/bin/perl -CD
 
 use utf8;
+use Getopt::Long;
 
 $debug = 0;
+
+GetOptions('debug' => \$debug);
 
 @files = `ls`;
 
