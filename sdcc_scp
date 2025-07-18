@@ -16,8 +16,9 @@ $prefix_string = 'sftp belmonrj@sftp.sdcc.bnl.gov:';
 
 if ( $go_up && !$come_down )
 {
-    $input_string = @go_up;
-    $command_string = $prefix_string.' <<< $\'put '.$input_string.'\'';
+    #$input_string = @go_up;
+    #$command_string = $prefix_string.' <<< $\'put '.$input_string.'\'';
+    $command_string = $prefix_string.' <<< $\'put '.@go_up.'\'';
     print "Command string is $command_string \n\n";
     if ( !$debug ) { system($command_string); }
 }
