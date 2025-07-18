@@ -12,8 +12,7 @@ kill_mau | Ron Belmont | Extremely simple one-liner to kill Microsoft AutoUpdate
 makebeamerpres | Darren McGlinchey | Takes all the image files in a directory and makes a latex-beamer presentation
 options | VLP | Just playing around with different ways of doing options for scripts...
 removespaces | Ron Belmont | Finds files with spaces in the name and removes them
-scpd | Ron Belmont | Uses sftp to copy files down from SDCC
-scpu | Ron Belmont | Uses sftp to copy files up to SDCC
+sdcc_scp | Ron Belmont | Uses sftp to copy files up or down from SDCC
 showenv | Ron Belmont | Shows the current SDCC environment
 showlib | Ron Belmont | Shows the current $LD_LIBRARY path at SDCC
 sinceuntil | Ron Belmont | Gives the time interval between now and some date, or between two dates; gives the date for a specifed time interval
