@@ -14,14 +14,11 @@ $prefix_string = "sftp belmonrj@sftp.sdcc.bnl.gov <<EOF\n";
 
 ####################################
 
-print "go_up array is ".@go_up,"\n";
-
 $up_string = '';
 
 foreach $up_file (@go_up)
 {
     chomp($up_file);
-    print "Hello here I am up file is ".$up_file."\n";
     $up_string.="put ".$up_file."\n";
 }
 
@@ -34,7 +31,6 @@ $down_string = '';
 foreach $down_file (@come_down)
 {
     chomp($down_file);
-    print "Hello here I am down file is ".$down_file."\n";
     $down_string.="get ".$down_file."\n";
 }
 
