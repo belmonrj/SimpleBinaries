@@ -2,34 +2,46 @@
 
 use Getopt::Long;
 
-@go_up = 0;
-@come_down = 0;
+@go_up;
+@come_down;
 $debug = 0;
 
-GetOptions('d|down=s' => \@come_down, 'u|up=s' => \@go_up, 'debug' => \$debug);
+GetOptions('d|down=s{1,}' => \@come_down, 'u|up=s{1,}' => \@go_up, 'debug' => \$debug);
 
 ####################################
 
-$prefix_string = 'sftp belmonrj@sftp.sdcc.bnl.gov:';
+$prefix_string = 'sftp belmonrj@sftp.sdcc.bnl.gov <<EOF';
 
 ####################################
 
-if ( @go_up && !@come_down )
+#print "go_up array is ".@go_up,"\n";
+
+$up_string = '';
+
+foreach $up_file (@go_up)
 {
-    $input_string = @go_up;
-    $command_string = $prefix_string.' <<< $\'put '.$input_string.'\'';
-    #$command_string = $prefix_string.' <<< $\'put '.@go_up.'\'';
-    print "Command string is $command_string \n\n";
-    if ( !$debug ) { system($command_string); }
+    chomp($up_file);
+    print "Hello here I am up file is ".$up_file."\n";
+    $up_string.=$up_file."\n";
+}
+
+print "up string is ".$upstring."\n";
+
+####################################
+
+$down_string = '';
+
+foreach $down_file (@come_down)
+{
+    chomp($down_file);
+    $down_string.=$down_file."\n";
 }
 
 ####################################
 
-if ( @come_down && !@go_up )
-{
-    $input_string = @come_down;
-    $command_string = $prefix_string.$input_string.' .';
-    print "Command string is $command_string \n\n";
-    if ( !$debug ) { system($command_string); }
-}
+$suffix_string = "EOF";
+
+$command_string = $prefix_string.$up_string.$down_string.$suffix_string;
+
+print "The final string is ".$command_string."\n";
 
