@@ -5,13 +5,12 @@ use Getopt::Long;
 @go_up;
 @come_down;
 $debug = 0;
+$verbose = 0;
 
-GetOptions('d|down=s{1,}' => \@come_down, 'u|up=s{1,}' => \@go_up, 'debug' => \$debug);
+GetOptions('d|down=s{1,}' => \@come_down, 'u|up=s{1,}' => \@go_up, 'debug' => \$debug, 'verbose' => \$verbose);
 
 ####################################
 
-# single quotes to get the exact string including the @
-# then double quotes to get a line break instead of a literal \n
 $prefix_string = 'sftp belmonrj@sftp.sdcc.bnl.gov <<EOF'."\n";
 
 ####################################
@@ -40,11 +39,11 @@ $suffix_string = "EOF\n";
 
 $command_string = $prefix_string.$up_string.$down_string.$suffix_string;
 
-if ( $debug )
+if ( $debug || $verbose )
 {
     print "The final string is:\n".$command_string."\n";
 }
-else
+if ( !$debug )
 {
     system($command_string);
 }
