@@ -10,7 +10,9 @@ GetOptions('d|down=s{1,}' => \@come_down, 'u|up=s{1,}' => \@go_up, 'debug' => \$
 
 ####################################
 
-$prefix_string = "sftp belmonrj@sftp.sdcc.bnl.gov <<EOF\n";
+#$prefix_string = "sftp belmonrj@sftp.sdcc.bnl.gov <<EOF\n";
+$shenanigans = 'belmonrj@sftp.sdcc.bnl.gov';
+$prefix_string = "sftp $shenanigans <<EOF\n";
 
 ####################################
 
@@ -34,13 +36,13 @@ foreach $down_file (@come_down)
 
 ####################################
 
-$suffix_string = "EOF";
+$suffix_string = "EOF\n";
 
 $command_string = $prefix_string.$up_string.$down_string.$suffix_string;
 
 if ( $debug )
 {
-    print "The final string is ".$command_string."\n";
+    print "The final string is:\n".$command_string."\n";
 }
 else
 {
