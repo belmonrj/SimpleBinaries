@@ -1,46 +1,42 @@
-#!/usr/bin/perl -CSD
+#!/usr/bin/perl
 
-use utf8;
+use open qw(:utf8 :std);
+use Getopt::Long;
 
-@LIST = `ls *\\\ * 2> /dev/null`;
+$debug = 0;
+$verbose = 0;
 
-foreach(@LIST)
+GetOptions('d|debug' => \$debug, 'v|verbose' => \$verbose);
+
+@files = `ls`;
+
+$pattern = qr/[\p{Space}():;,]/;
+
+$count = 0;
+foreach $file (@files)
 {
-
-    $file = $_;
     chomp($file);
-
-    $file1 = $file;
-    $file2 = $file;
-
-    $file2 =~ s/\(/_/g; # replace '(' with '_'
-    $file2 =~ s/\)/_/g; # replace ')' with '_'
-    $file2 =~ s/\:/X/g; # replace ':' with 'X'
-
-    # this one works as desired
-    # replace regular unicode space U+0020 with '_'
-    $file2 =~ s/[\x{0020}]/_/g;
-
-    # this one doesn't do anything for me, but may be useful
-    # replace non-breaking unicode space U+00A0 with '_'
-    $file2 =~ s/[\x{00A0}]/_/g;
-
-    # I got this one at unicodedecoder.com - this is the funny one in the macOS screenshot file name
-    # replace non-breaking unicode space U+202F with '_'
-    $file2 =~ s/[\x{202F}]/_/g;
-
-    system("mv \"$file1\" $file2");
-
+    if ( $verbose ) { print "there is a file named: ".$file."\n"; }
+    if ($file =~ $pattern)
+    {
+        if ( $debug || $verbose ) { print "found a match: ".$file."\n"; }
+        $count++;
+        $newfile = $file;
+        $newfile =~ s/$pattern/_/g;
+        if ( $debug || $verbose ) { print "proposed new file name is: ".$newfile."\n"; }
+        if ( !$debug ) { rename($file, $newfile) or warn "Could not rename $file: $!"; }
+    }
 }
 
-$size = @LIST;
+$word = "changed";
+if ( $debug ) { $word = "found"; }
 
-if ( $size == 1 )
+if ( $count == 1 )
 {
-    print "1 file changed \n";
+    print "1 file ".$word." \n";
 }
 else
 {
-    print "$size files changed \n";
+    print "$count files ".$word." \n";
 }
 
