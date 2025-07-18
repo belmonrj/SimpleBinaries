@@ -10,9 +10,9 @@ GetOptions('d|down=s{1,}' => \@come_down, 'u|up=s{1,}' => \@go_up, 'debug' => \$
 
 ####################################
 
-#$prefix_string = "sftp belmonrj@sftp.sdcc.bnl.gov <<EOF\n";
-$shenanigans = 'belmonrj@sftp.sdcc.bnl.gov';
-$prefix_string = "sftp $shenanigans <<EOF\n";
+# single quotes to get the exact string including the @
+# then double quotes to get a line break instead of a literal \n
+$prefix_string = 'sftp belmonrj@sftp.sdcc.bnl.gov <<EOF'."\n";
 
 ####################################
 
