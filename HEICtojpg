@@ -1,5 +1,11 @@
 #!/usr/bin/perl
 
+use Getopt::Long;
+
+$kill = 0;
+
+GetOptions('k|kill' => \$kill);
+
 @LIST = `ls *.HEIC`;
 
 foreach(@LIST)
@@ -11,8 +17,7 @@ foreach(@LIST)
     $file =~ s/\.HEIC//;
 
     system("magick $file.HEIC -quality 95% $file.jpg");
-    # add a flag here for optional deletion of HEIC
-    #system("rm $file.HEIC");
+    if ( $kill ) { system("rm $file.HEIC"); }
 
 }
 
