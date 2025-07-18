@@ -2,8 +2,8 @@
 
 use Getopt::Long;
 
-$go_up = 0;
-$come_down = 0;
+@go_up = 0;
+@come_down = 0;
 $debug = 0;
 
 GetOptions('d|down=s' => \$come_down, 'u|up=s' => \$go_up, 'debug' => \$debug);
@@ -16,7 +16,7 @@ $prefix_string = 'sftp belmonrj@sftp.sdcc.bnl.gov:';
 
 if ( $go_up && !$come_down )
 {
-    $input_string = $go_up;
+    $input_string = @go_up;
     $command_string = $prefix_string.' <<< $\'put '.$input_string.'\'';
     print "Command string is $command_string \n\n";
     if ( !$debug ) { system($command_string); }
@@ -26,7 +26,7 @@ if ( $go_up && !$come_down )
 
 if ( $come_down && !$go_up )
 {
-    $input_string = $come_down;
+    $input_string = @come_down;
     $command_string = $prefix_string.$input_string.' .';
     print "Command string is $command_string \n\n";
     if ( !$debug ) { system($command_string); }
