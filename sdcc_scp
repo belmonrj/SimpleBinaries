@@ -22,8 +22,6 @@ foreach $up_file (@go_up)
     $up_string.="put ".$up_file."\n";
 }
 
-print "up string is ".$up_string."\n";
-
 ####################################
 
 $down_string = '';
