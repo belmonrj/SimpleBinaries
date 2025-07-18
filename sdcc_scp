@@ -10,11 +10,11 @@ GetOptions('d|down=s{1,}' => \@come_down, 'u|up=s{1,}' => \@go_up, 'debug' => \$
 
 ####################################
 
-$prefix_string = 'sftp belmonrj@sftp.sdcc.bnl.gov <<EOF';
+$prefix_string = "sftp belmonrj@sftp.sdcc.bnl.gov <<EOF\n";
 
 ####################################
 
-#print "go_up array is ".@go_up,"\n";
+print "go_up array is ".@go_up,"\n";
 
 $up_string = '';
 
@@ -22,10 +22,10 @@ foreach $up_file (@go_up)
 {
     chomp($up_file);
     print "Hello here I am up file is ".$up_file."\n";
-    $up_string.=$up_file."\n";
+    $up_string.="put ".$up_file."\n";
 }
 
-print "up string is ".$upstring."\n";
+print "up string is ".$up_string."\n";
 
 ####################################
 
@@ -34,7 +34,8 @@ $down_string = '';
 foreach $down_file (@come_down)
 {
     chomp($down_file);
-    $down_string.=$down_file."\n";
+    print "Hello here I am down file is ".$down_file."\n";
+    $down_string.="get ".$down_file."\n";
 }
 
 ####################################
@@ -43,5 +44,12 @@ $suffix_string = "EOF";
 
 $command_string = $prefix_string.$up_string.$down_string.$suffix_string;
 
-print "The final string is ".$command_string."\n";
+if ( $debug )
+{
+    print "The final string is ".$command_string."\n";
+}
+else
+{
+    system($command_string);
+}
 
