@@ -6,7 +6,7 @@ use Getopt::Long;
 $debug = 0;
 $verbose = 0;
 
-GetOptions('debug' => \$debug, 'verbose' => \$verbose);
+GetOptions('d|debug' => \$debug, 'v|verbose' => \$verbose);
 
 @files = `ls`;
 
