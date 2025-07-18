@@ -1,6 +1,7 @@
-#!/usr/bin/perl -CD
+#!/usr/bin/perl
 
-use utf8;
+#use utf8;
+use open qw(:utf8 :std);
 use Getopt::Long;
 
 $debug = 0;
