@@ -1,17 +1,19 @@
 #!/usr/bin/perl
 
+use strict;
+use warnings;
 use Getopt::Long;
 
-$kill = 0;
+my $kill = 0;
 
 GetOptions('k|kill' => \$kill);
 
-@LIST = `ls *.HEIC`;
+my @LIST = `ls *.HEIC 2>/dev/null`;
 
 foreach(@LIST)
 {
 
-    $file = $_;
+    my $file = $_;
     chomp($file);
 
     $file =~ s/\.HEIC//;
@@ -21,7 +23,7 @@ foreach(@LIST)
 
 }
 
-$size = @LIST;
+my $size = @LIST;
 
 if ( $size == 1 )
 {
