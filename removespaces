@@ -1,18 +1,21 @@
 #!/usr/bin/perl
 
+use strict;
+use warnings;
 use open qw(:utf8 :std);
 use Getopt::Long;
 
-$debug = 0;
-$verbose = 0;
+my $debug = 0;
+my $verbose = 0;
 
 GetOptions('d|debug' => \$debug, 'v|verbose' => \$verbose);
 
-@files = `ls`;
+my @files = `ls`;
 
-$pattern = qr/[\p{Space}():;,]/;
+my $pattern = qr/[\p{Space}():;,]/;
 
-$count = 0;
+my $count = 0;
+my $file = '';
 foreach $file (@files)
 {
     chomp($file);
@@ -21,14 +24,14 @@ foreach $file (@files)
     {
         if ( $debug || $verbose ) { print "found a match: ".$file."\n"; }
         $count++;
-        $newfile = $file;
+        my $newfile = $file;
         $newfile =~ s/$pattern/_/g;
         if ( $debug || $verbose ) { print "proposed new file name is: ".$newfile."\n"; }
         if ( !$debug ) { rename($file, $newfile) or warn "Could not rename $file: $!"; }
     }
 }
 
-$word = "changed";
+my $word = "changed";
 if ( $debug ) { $word = "found"; }
 
 if ( $count == 1 )
