@@ -1,11 +1,14 @@
 #!/usr/bin/perl
 
-@LIST = `ls *.txt`;
+use strict;
+use warnings;
+
+my @LIST = `ls *.txt`;
 
 foreach(@LIST)
 {
 
-    $file = $_;
+    my $file = $_;
     chomp($file);
 
     $file =~ s/\.txt//;
