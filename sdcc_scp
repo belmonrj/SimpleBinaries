@@ -1,22 +1,24 @@
 #!/usr/bin/perl
 
+use strict;
+use warnings;
 use Getopt::Long;
 
-@go_up;
-@come_down;
-$debug = 0;
-$verbose = 0;
+my @go_up;
+my @come_down;
+my $debug = 0;
+my $verbose = 0;
 
 GetOptions('d|down=s{1,}' => \@come_down, 'u|up=s{1,}' => \@go_up, 'debug' => \$debug, 'verbose' => \$verbose);
 
 ####################################
 
-$prefix_string = 'sftp belmonrj@sftp.sdcc.bnl.gov <<EOF'."\n";
+my $prefix_string = 'sftp belmonrj@sftp.sdcc.bnl.gov <<EOF'."\n";
 
 ####################################
 
-$up_string = '';
-
+my $up_string = '';
+my $up_file;
 foreach $up_file (@go_up)
 {
     chomp($up_file);
@@ -25,8 +27,8 @@ foreach $up_file (@go_up)
 
 ####################################
 
-$down_string = '';
-
+my $down_string = '';
+my $down_file;
 foreach $down_file (@come_down)
 {
     chomp($down_file);
@@ -35,9 +37,9 @@ foreach $down_file (@come_down)
 
 ####################################
 
-$suffix_string = "EOF\n";
+my $suffix_string = "EOF\n";
 
-$command_string = $prefix_string.$up_string.$down_string.$suffix_string;
+my $command_string = $prefix_string.$up_string.$down_string.$suffix_string;
 
 if ( $debug || $verbose )
 {
