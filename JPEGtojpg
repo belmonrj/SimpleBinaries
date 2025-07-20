@@ -1,12 +1,17 @@
 #!/usr/bin/perl
 
-@LIST = `ls *.jpeg 2> /dev/null`;
+use strict;
+use warnings;
 
-$size1 = @LIST;
+
+
+my @LIST = `ls *.jpeg 2> /dev/null`;
+
+my $size1 = @LIST;
 
 foreach(@LIST)
 {
-    $file = $_;
+    my $file = $_;
     chomp($file);
     $file =~ s/\.jpeg//;
     system("mv $file.jpeg $file.jpg");
@@ -16,11 +21,11 @@ foreach(@LIST)
 
 @LIST = `ls *.JPG 2> /dev/null`;
 
-$size2 = @LIST;
+my $size2 = @LIST;
 
 foreach(@LIST)
 {
-    $file = $_;
+    my $file = $_;
     chomp($file);
     $file =~ s/\.JPG//;
     system("mv $file.JPG $file.jpg");
@@ -28,7 +33,21 @@ foreach(@LIST)
 
 
 
-$size = $size1 + $size2;
+@LIST = `ls *.JPEG 2> /dev/null`;
+
+my $size3 = @LIST;
+
+foreach(@LIST)
+{
+    my $file = $_;
+    chomp($file);
+    $file =~ s/\.JPEG//;
+    system("mv $file.JPEG $file.jpg");
+}
+
+
+
+my $size = $size1 + $size2 + $size3;
 
 if ( $size == 1 )
 {
