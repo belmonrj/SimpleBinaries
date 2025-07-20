@@ -1,3 +1,10 @@
+# Simple Binaries
+
+## Welcome to my collection of assorted CLI tools!
+Some of these are very useful for work
+and work-adjacent tasks, while others are just for fun.
+
+## Scripts at a glance table:
 File name | Author | Brief explanation
 --------- | ------ | -----------------
 bco | Martin Purschke | Provides the "beam count orbit" for a specifed date, or the current date if none is specifed
