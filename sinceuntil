@@ -180,7 +180,7 @@ for arg in "$@"; do
       exit 0
       ;;
     --help|-h)
-      echo "Usage: $0 [--since=\"DATE\"] [--until=\"DATE\"]"
+      echo "Usage: $0 [--since=\"DATE\"] [--until=\"DATE\"] [--ago=NUMBER] [--from_now=NUMBER]"
       exit 0
       ;;
     --days)
