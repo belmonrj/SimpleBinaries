@@ -1,0 +1,41 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+
+
+my @texfiles = `ls *.tex 2> /dev/null`;
+my @pdffiles = map { s/\.tex/.pdf/r } @texfiles;
+
+open my $outfile, ">", "Makefile" or die "Cannot write Makefile: $!";
+
+print $outfile "# Auto-generated Makefile\n\n";
+#print $outfile "TEXFILES := @texfiles\n";
+#print $outfile "PDFFILES := @pdffiles\n\n";
+print $outfile "TEXFILES := ";
+foreach(@texfiles)
+{
+    my $texfile = $_;
+    chomp($texfile);
+    print $outfile "$texfile \\\n";
+}
+print $outfile "\n";
+print $outfile "PDFFILES := ";
+foreach(@pdffiles)
+{
+    my $pdffile = $_;
+    chomp($pdffile);
+    print $outfile "$pdffile \\\n";
+}
+print $outfile "\n";
+print $outfile "all: \$(PDFFILES)\n\n";
+print $outfile "%.pdf: %.tex\n";
+print $outfile "\tlatexmk -pdf -quiet -f \$<\n\n";
+print $outfile "clean:\n";
+print $outfile "\tlatexmk -C\n";
+
+close $outfile;
+
+print "Makefile generated with ", scalar(@texfiles), " .tex files.\n";
+
