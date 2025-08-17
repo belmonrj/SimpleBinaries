@@ -1,2 +1,2 @@
-killall "Microsoft AutoUpdate"
+killall -9 "Microsoft AutoUpdate"
 echo All done, have a nice day!
