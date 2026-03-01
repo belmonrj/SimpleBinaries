@@ -1,24 +1,29 @@
 #!/usr/bin/perl
 
-($old, $new) = @ARGV;
+use strict;
+use warnings;
+
+
+
+my ($old, $new) = @ARGV;
 
 print "Old pattern is $old and new pattern is $new\n";
 
-@LIST = glob("$old\*");
+my @LIST = glob("$old\*");
 
-$size = @LIST;
-$zero = length($size);
+my $size = @LIST;
+my $zero = length($size);
 
 
-$index = 0;
+my $index = 0;
 foreach(@LIST)
 {
     $index++;
-    $file = $_;
+    my $file = $_;
     chomp($file);
-    $newfile = sprintf("%s_%0*d.png",$new,$zero,$index);
+    my $newfile = sprintf("%s_%0*d.png",$new,$zero,$index);
     print "Old name is $file, new name is $newfile \n";
-    #system("mv $file $newfile");
+    system("mv $file $newfile");
 }
 
 
