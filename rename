@@ -1,0 +1,34 @@
+#!/usr/bin/perl
+
+($old, $new) = @ARGV;
+
+print "Old pattern is $old and new pattern is $new\n";
+
+@LIST = glob("$old\*");
+
+$size = @LIST;
+$zero = length($size);
+
+
+$index = 0;
+foreach(@LIST)
+{
+    $index++;
+    $file = $_;
+    chomp($file);
+    $newfile = sprintf("%s_%0*d.png",$new,$zero,$index);
+    print "Old name is $file, new name is $newfile \n";
+    #system("mv $file $newfile");
+}
+
+
+
+if ( $size == 1 )
+{
+    print "1 file changed \n";
+}
+else
+{
+    print "$size files changed \n";
+}
+
