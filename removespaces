@@ -12,7 +12,7 @@ GetOptions('d|debug' => \$debug, 'v|verbose' => \$verbose);
 
 my @files = `ls`;
 
-my $pattern = qr/[\p{Space}():;,]/;
+my $pattern = qr/[\p{Space}():;,&]/;
 
 my $count = 0;
 my $file = '';
