@@ -23,7 +23,26 @@ foreach(@LIST)
 
 }
 
-my $size = @LIST;
+my $size_cap = @LIST;
+
+@LIST = `ls *.heic 2>/dev/null`;
+
+foreach(@LIST)
+{
+
+    my $file = $_;
+    chomp($file);
+
+    $file =~ s/\.heic//;
+
+    system("magick $file.heic -quality 95% $file.jpg");
+    if ( $kill ) { system("rm $file.heic"); }
+
+}
+
+my $size_small = @LIST;
+
+my $size = $size_small + $size_cap;
 
 if ( $size == 1 )
 {
