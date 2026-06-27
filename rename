@@ -3,6 +3,8 @@
 use strict;
 use warnings;
 
+use File::Basename;
+
 
 
 my ($old, $new, $start) = @ARGV;
@@ -46,8 +48,20 @@ foreach(@LIST)
 {
     my $file = $_;
     chomp($file);
-    my $newfile = sprintf("%s_%0*d.png",$new,$zero,$index);
+
+    # determine file extension on the fly
+    # from the Perl cookbook: https://docstore.mik.ua/orelly/perl4/cook/ch09_11.htm
+    my ($base, $dir, $ext) = fileparse($file,'\..*');
+    #print "From filename $file: base is $base, dir is $dir, and ext is $ext \n";
+
+    # determine the new name from the given string, the zero padding, the starting index, and the file extension
+    # note that the file extension includes the dot, so we don't need to add one here
+    my $newfile = sprintf("%s_%0*d%s",$new,$zero,$index,$ext);
     print "Old name is $file, new name is $newfile \n";
+    # don't overwrite existing files
+    die "Refusing to overwrite existing file $newfile, check your starting index and try again\n" if -e $newfile;
+
+    # change the name and increment the index
     system("mv $file $newfile");
     $index++;
 }
