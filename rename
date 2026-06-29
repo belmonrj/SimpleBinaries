@@ -51,7 +51,8 @@ foreach(@LIST)
 
     # determine file extension on the fly
     # from the Perl cookbook: https://docstore.mik.ua/orelly/perl4/cook/ch09_11.htm
-    my ($base, $dir, $ext) = fileparse($file,'\..*');
+    # my ($base, $dir, $ext) = fileparse($file,'\..*'); # first period
+    my ($base, $dir, $ext) = fileparse($file,'\.[^.]*'); # final period
     #print "From filename $file: base is $base, dir is $dir, and ext is $ext \n";
 
     # determine the new name from the given string, the zero padding, the starting index, and the file extension
