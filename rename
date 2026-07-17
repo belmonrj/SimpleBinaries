@@ -6,6 +6,9 @@ use warnings;
 use File::Basename;
 
 
+### I think this doesn't work correctly if you try to include directories in the name
+### I'll try to add that functionality next
+
 
 my ($old, $new, $start) = @ARGV;
 
